@@ -1,2 +1,3 @@
 # Persistence
-Persistence layer of the project
+
+Layer responsible for persistant data storage of the application
