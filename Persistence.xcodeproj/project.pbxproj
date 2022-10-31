@@ -78,12 +78,12 @@
 		F0BF8C24290EC2BB00D271CD /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				F0BF8C26290EC2BB00D271CD /* Persistence.docc */,
 				F0BF8C49290EC3C600D271CD /* Common */,
 				F0BF8C5A290EC4AE00D271CD /* Models */,
 				F0BF8C48290EC3B100D271CD /* CoreData */,
 				F0BF8C47290EC3AA00D271CD /* UserDefaults */,
 				F0BF8C25290EC2BB00D271CD /* Persistence.h */,
-				F0BF8C26290EC2BB00D271CD /* Persistence.docc */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
