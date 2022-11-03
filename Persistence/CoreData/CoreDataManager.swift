@@ -8,22 +8,24 @@
 import CoreData
 
 public protocol CoreDataManagerProtocol {
+    func fetchRecipes() -> [Recipe]?
+    func createRecipe()
+    func delete(recipe: Recipe)
 }
 
-/// Responsible for CRUD operations with CoreData
+/// Responsible for CRUD operations with CoreData.
 public final class CoreDataManager: CoreDataManagerProtocol {
     
     // MARK: - Private Properties
     
     private let managedObjectContext: NSManagedObjectContext
     private let persistentContainer: NSPersistentContainer
-    private let frameworkBundle: Bundle = Bundle(identifier: "com.egbad.Persistence") ?? .main
     
     // MARK: - Init
     
     /// Common init.
     public init(containerName: String) {
-        guard let modelURL = frameworkBundle.url(forResource: containerName, withExtension: "momd") else {
+        guard let modelURL = Bundle(for: CoreDataManager.self).url(forResource: containerName, withExtension: "momd") else {
             fatalError("Could not initialize url for framework's bundle")
         }
         guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
@@ -39,7 +41,7 @@ public final class CoreDataManager: CoreDataManagerProtocol {
     }
     
     /// Saves managed object contexts.
-    public func saveContext() {
+    private func saveContext() {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
@@ -48,5 +50,20 @@ public final class CoreDataManager: CoreDataManagerProtocol {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    public func createRecipe() {
+        let recipe = Recipe(context: managedObjectContext)
+        recipe.name = "Title"
+        saveContext()
+    }
+    
+    public func fetchRecipes() -> [Recipe]? {
+        try? managedObjectContext.fetch(Recipe.fetchRequest())
+    }
+    
+    public func delete(recipe: Recipe) {
+        managedObjectContext.delete(recipe)
+        saveContext()
     }
 }
