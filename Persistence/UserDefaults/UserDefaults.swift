@@ -10,6 +10,6 @@ import Models
 
 public extension UserDefaults {
     /// Contains array of user's favourite recipes.
-    @UserDefault(key: "favouriteRecipes", defaultValue: [Models.Recipe]())
+    @UserDefaultCodable(key: "favouriteRecipes", defaultValue: [Models.Recipe]())
     static var favouriteRecipes: [Models.Recipe]
 }
