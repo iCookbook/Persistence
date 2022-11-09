@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
   
   s.source_files = 'Persistence/**/*.{swift}'
-  s.resources = 'Persistence/CoreData/**/*.{xcdatamodeld}'
+  s.resources = 'Persistence/**/*.{xcdatamodeld}'
   
   s.dependency 'Models'
 end
