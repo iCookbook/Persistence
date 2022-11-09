@@ -29,15 +29,15 @@ public struct UserDefaultCodable<T: Codable> {
     /// Wrapper of value to deal with `defaultValue` and different cases of usage.
     public var wrappedValue: T {
         get {
-            if let data = UserDefaults.standard.object(forKey: key) as? Data,
+            if let data = container.object(forKey: key) as? Data,
                let user = try? JSONDecoder().decode(T.self, from: data) {
                 return user
             }
-            return  defaultValue
+            return defaultValue
         }
         set {
             if let encoded = try? JSONEncoder().encode(newValue) {
-                UserDefaults.standard.set(encoded, forKey: key)
+                container.set(encoded, forKey: key)
             }
         }
     }

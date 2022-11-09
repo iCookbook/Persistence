@@ -14,6 +14,8 @@ public struct UserDefault<Value> {
     /// UserDefaults container. `.standard` by default.
     var container: UserDefaults = .standard
     
+    // MARK: - Public Properties
+    
     /// Wrapper of value to deal with `defaultValue` and different cases of usage.
     public var wrappedValue: Value {
         get {
