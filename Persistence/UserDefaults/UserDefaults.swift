@@ -5,10 +5,10 @@
 //  Created by Егор Бадмаев on 30.07.2022.
 //
 
-import Foundation
+import Models
 
 public extension UserDefaults {
-    /// Defines whether to show or not daily budget
-    @UserDefault(key: "counter", defaultValue: 0)
-    static var counter: Int
+    /// Contains array of user's favourite recipes.
+    @UserDefaultCodable(key: "favouriteRecipes", defaultValue: [Models.Recipe]())
+    static var favouriteRecipes: [Models.Recipe]
 }

@@ -5,8 +5,6 @@
 //  Created by Егор Бадмаев on 30.07.2022.
 //
 
-import Foundation
-
 @propertyWrapper
 public struct UserDefault<Value> {
     /// Key for user default setting.
