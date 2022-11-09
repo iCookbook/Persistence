@@ -17,12 +17,16 @@ public struct UserDefaultCodable<T: Codable> {
     /// UserDefaults container. `.standard` by default.
     var container: UserDefaults = .standard
     
-    /// Wrapper of value to deal with `defaultValue` and different cases of usage.
+    // MARK: - Init
+    
     public init(key: String, defaultValue: T) {
         self.key = key
         self.defaultValue = defaultValue
     }
     
+    // MARK: - Public Properties
+    
+    /// Wrapper of value to deal with `defaultValue` and different cases of usage.
     public var wrappedValue: T {
         get {
             if let data = UserDefaults.standard.object(forKey: key) as? Data,
