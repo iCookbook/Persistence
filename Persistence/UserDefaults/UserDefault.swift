@@ -34,7 +34,7 @@ public struct UserDefault<Value> {
 
 /// We define a new initializer in `extension` so as not  to lose memberwise initializer
 extension UserDefault where Value: ExpressibleByNilLiteral {
-    /// Creates a new UserDefaults property wrapper for the given key with `nil` as the ``defaultValue``.
+    /// Creates a new UserDefaults property wrapper for the given key with `nil` as the `defaultValue`.
     ///
     /// - Parameters:
     ///   - key: The key to use with the UserDefaults store.

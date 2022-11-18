@@ -11,4 +11,8 @@ public extension UserDefaults {
     /// Contains array of user's favourite recipes.
     @UserDefaultCodable(key: "favouriteRecipes", defaultValue: [Models.Recipe]())
     static var favouriteRecipes: [Models.Recipe]
+    
+    /// Contains search requests history.
+    @UserDefault(key: "searchRequestsHistory", defaultValue: [String]())
+    static var searchRequestsHistory: [String]
 }
