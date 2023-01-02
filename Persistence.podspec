@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Persistence'
-  s.version          = '1.5.1'
+  s.version          = '2.0.0'
   s.summary          = 'Persistence layer of the project.'
   s.homepage         = 'https://github.com/iCookbook/Persistence'
   s.author           = { 'htmlprogrammist' => '60363270+htmlprogrammist@users.noreply.github.com' }
@@ -13,4 +13,5 @@ Pod::Spec.new do |s|
   s.resources = 'Persistence/**/*.{xcdatamodeld}'
   
   s.dependency 'Models'
+  s.dependency 'Logger'
 end
