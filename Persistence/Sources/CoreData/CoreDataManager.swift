@@ -12,23 +12,24 @@ public typealias CoreDataManagerProtocol = CDRecipeProtocol & CDStepProtocol
 
 public protocol CDRecipeProtocol {
     func fetchRecipes() -> [Recipe]?
-    func create(with data: RecipeData)
+    func createRecipe(with data: RecipeData)
     func update(_ recipe: Recipe, with data: RecipeData)
-    func delete(recipe: Recipe)
+    func delete(_ recipe: Recipe)
 }
 
 public protocol CDStepProtocol {
-    func create(with data: StepData, for recipe: Recipe)
+    func createStep(with data: StepData, for recipe: Recipe)
     func update(_ step: Step, with data: StepData)
-    func delete(step: Step)
+    func delete(_ step: Step)
 }
 
 /// Responsible for CRUD operations with CoreData.
 public final class CoreDataManager {
     
+    let managedObjectContext: NSManagedObjectContext
+    
     // MARK: - Private Properties
     
-    private let managedObjectContext: NSManagedObjectContext
     private let persistentContainer: NSPersistentContainer
     
     // MARK: - Init
@@ -99,7 +100,7 @@ public final class CoreDataManager {
         recipe.imageData = data.imageData
         
         data.steps?.forEach {
-            create(with: $0, for: recipe)
+            createStep(with: $0, for: recipe)
         }
     }
     
@@ -117,7 +118,7 @@ extension CoreDataManager: CDRecipeProtocol {
         try? managedObjectContext.fetch(Recipe.fetchRequest())
     }
     
-    public func create(with data: RecipeData) {
+    public func createRecipe(with data: RecipeData) {
         let recipe = Recipe(context: managedObjectContext)
         transferData(from: data, to: recipe)
         saveContext()
@@ -128,7 +129,7 @@ extension CoreDataManager: CDRecipeProtocol {
         saveContext()
     }
     
-    public func delete(recipe: Recipe) {
+    public func delete(_ recipe: Recipe) {
         managedObjectContext.delete(recipe)
         saveContext()
     }
@@ -138,7 +139,7 @@ extension CoreDataManager: CDRecipeProtocol {
 
 extension CoreDataManager: CDStepProtocol {
     
-    public func create(with data: StepData, for recipe: Recipe) {
+    public func createStep(with data: StepData, for recipe: Recipe) {
         let step = Step(context: managedObjectContext)
         transferData(from: data, to: step)
         recipe.addToSteps(step)
@@ -150,7 +151,7 @@ extension CoreDataManager: CDStepProtocol {
         saveContext()
     }
     
-    public func delete(step: Step) {
+    public func delete(_ step: Step) {
         managedObjectContext.delete(step)
         saveContext()
     }
