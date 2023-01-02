@@ -11,25 +11,59 @@ import Logger
 public typealias CoreDataManagerProtocol = CDRecipeProtocol & CDStepProtocol
 
 public protocol CDRecipeProtocol {
+    /// Fetches recipes from Core Data storage.
+    ///
+    /// - Returns: Array of recipes.
     func fetchRecipes() -> [Recipe]?
+    
+    /// Creates recipe with provided data.
+    ///
+    /// - Parameter data: The model with which we create a recipe.
     func createRecipe(with data: RecipeData)
+    
+    /// Updates provided recipe with provided data.
+    ///
+    /// - Parameters:
+    ///   - recipe: Recipe to update.
+    ///   - data: Data required for the update.
     func update(_ recipe: Recipe, with data: RecipeData)
+    
+    /// Deletes `Recipe`'s instance from Core Data.
+    ///
+    /// - Parameter recipe: recipe to be deleted from managed object context.
     func delete(_ recipe: Recipe)
 }
 
 public protocol CDStepProtocol {
+    /// Creates step in provided recipe.
+    ///
+    /// - Parameters:
+    ///   - data: Data required for creating the step.
+    ///   - recipe: `Recipe` instance in which step will be added.
     func createStep(with data: StepData, for recipe: Recipe)
+    
+    /// Updates provided step with provided data.
+    ///
+    /// - Parameters:
+    ///   - step: `Step` instance to update.
+    ///   - data: Data required for the update.
     func update(_ step: Step, with data: StepData)
+    
+    /// Deletes `Step`'s instance from Core Data.
+    ///
+    /// - Parameter step: step to be deleted from managed object context.
     func delete(_ step: Step)
 }
 
 /// Responsible for CRUD operations with CoreData.
 public final class CoreDataManager {
     
+    /// An object space to manipulate and track changes to managed objects.
     let managedObjectContext: NSManagedObjectContext
     
     // MARK: - Private Properties
     
+    /// A container that encapsulates the Core Data stack.
     private let persistentContainer: NSPersistentContainer
     
     // MARK: - Init
