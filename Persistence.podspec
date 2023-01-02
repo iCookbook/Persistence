@@ -9,8 +9,12 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.0'
   s.swift_version = '5.0'
   
-  s.source_files = 'Persistence/**/*.{swift}'
-  s.resources = 'Persistence/**/*.{xcdatamodeld}'
+  s.source_files = 'Persistence/Sources/**/*.{swift}'
+  s.resources = 'Persistence/Sources/**/*.{xcdatamodeld}'
+  
+  s.test_spec 'Tests' do |test_spec|
+    test_spec.source_files = 'Persistence/Tests/**/*.{swift}'
+  end
   
   s.dependency 'Models'
   s.dependency 'Logger'
