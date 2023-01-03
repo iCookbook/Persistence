@@ -5,7 +5,7 @@ Layer responsible for persistant data storage of the application
 ## Use cases
 
 ### User Defaults
-Just call for example `UserDefaults.favouriteRecipes`. All user defaults keys are described in [UserDefaults.swift](/UserDefaults/UserDefaults.swift).
+Just call for example `UserDefaults.favouriteRecipes`. All user defaults keys are described in [UserDefaults.swift](/Persistence/Sources/UserDefaults/UserDefaults.swift).
 
 ### Core Data
 
@@ -19,8 +19,8 @@ public typealias CoreDataManagerProtocol = CDRecipeProtocol & CDStepProtocol
 
 For working with User Defaults, we have implemented 2 property wrappers:
 
-- [Usual](/UserDefaults/UserDefault.swift)
-- [For `Codable` models](/UserDefaults/UserDefaultCodable.swift)
+- [Usual](/Persistence/Sources/UserDefaults/UserDefault.swift)
+- [For `Codable` models](/Persistence/Sources/UserDefaults/UserDefaultCodable.swift)
 
 ## Core Data
 
