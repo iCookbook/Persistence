@@ -33,4 +33,4 @@ It has 2 initializers:
 
 ---
 
-For more details, read [GitHub Wiki] documentation(https://github.com/iCookbook/Persistence/wiki)
+For more details, read [GitHub Wiki](https://github.com/iCookbook/Persistence/wiki) documentation
