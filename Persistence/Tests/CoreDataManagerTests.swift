@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import Persistence
+@testable import Models
 
 class CoreDataManagerTests: XCTestCase {
     
@@ -23,6 +24,18 @@ class CoreDataManagerTests: XCTestCase {
     func testFetchingRecipe() throws {
         let recipes = coreDataManager.fetchRecipes()
         XCTAssertNotNil(recipes, "Returned value should not equals nil")
+    }
+    
+    func testFetchingOneRecipe() throws {
+        // Given
+        let data = RecipeData(name: "Test", dateCreated: Date(), numberOfServings: 1, proteins: 0.0, fats: 0.0, carbohydrates: 0.0, calories: 0.0, cookingTime: 1, comment: nil, ingredients: nil, imageData: nil, steps: nil)
+        coreDataManager.createRecipe(with: data)
+        
+        // When
+        let recipe = coreDataManager.fetchRecipe(by: data)
+        
+        // Then
+        XCTAssertNotNil(recipe, "Returned value should not equals nil")
     }
     
     func testCreatingRecipe() throws {

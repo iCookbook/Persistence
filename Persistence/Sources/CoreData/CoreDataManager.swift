@@ -17,6 +17,13 @@ public protocol CDRecipeProtocol {
     /// - Returns: Array of recipes.
     func fetchRecipes() -> [Recipe]?
     
+    /// Fetches only one definite recipe.
+    ///
+    /// - Parameter data: Data to find recipe.
+    ///
+    /// - Returns: Recipe we fetched.
+    func fetchRecipe(by data: RecipeData) -> Recipe?
+    
     /// Creates recipe with provided data.
     ///
     /// - Parameter data: The model with which we create a recipe.
@@ -124,18 +131,21 @@ public final class CoreDataManager {
     private func transferData(from data: RecipeData, to recipe: Recipe) {
         recipe.name = data.name
         recipe.dateCreated = data.dateCreated
-        recipe.numberOfServings = data.numberOfServings
-        recipe.proteins = data.proteins
-        recipe.fats = data.fats
-        recipe.carbohydrates = data.carbohydrates
-        recipe.calories = data.calories
-        recipe.cookingTime = data.cookingTime
+        recipe.numberOfServings = data.numberOfServings ?? 0
+        recipe.proteins = data.proteins ?? 0.0
+        recipe.fats = data.fats ?? 0.0
+        recipe.carbohydrates = data.carbohydrates ?? 0.0
+        recipe.calories = data.calories ?? 0.0
+        recipe.cookingTime = data.cookingTime ?? 0
         recipe.comment = data.comment
         recipe.ingredients = data.ingredients
         recipe.imageData = data.imageData
         
         data.steps?.forEach {
-            createStep(with: $0, for: recipe)
+            guard let index = data.steps?.firstIndex(of: $0),
+                  let array = recipe.steps?.array as? [Step] else { return }
+            
+            update(array[index], with: $0)
         }
     }
     
@@ -150,7 +160,16 @@ public final class CoreDataManager {
 extension CoreDataManager: CDRecipeProtocol {
     
     public func fetchRecipes() -> [Recipe]? {
-        try? managedObjectContext.fetch(Recipe.fetchRequest())
+        let fetchRequest = Recipe.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(Recipe.dateCreated), ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return try? managedObjectContext.fetch(fetchRequest)
+    }
+    
+    public func fetchRecipe(by data: RecipeData) -> Recipe? {
+        let fetchRequest = Recipe.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name = %@", data.name)
+        return (try? managedObjectContext.fetch(fetchRequest))?.first
     }
     
     public func createRecipe(with data: RecipeData) {
