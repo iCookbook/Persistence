@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import Models
 import Logger
 
 public typealias CoreDataManagerProtocol = CDRecipeProtocol & CDStepProtocol
