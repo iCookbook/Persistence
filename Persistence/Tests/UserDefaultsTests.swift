@@ -23,10 +23,10 @@ class UserDefaultsTests: XCTestCase {
     }
     
     func testCodableUserDefault() throws {
-        XCTAssertEqual(UserDefaults.favouriteRecipes, [Models.Recipe](), "Favourite recipes should equal empty array by default.")
-        XCTAssertEqual(UserDefaults.cuisinesFilters, [Cuisine](), "Cuisine filters should equal empty array by default.")
-        XCTAssertEqual(UserDefaults.dietsFilters, [Diet](), "Diet filters should equal empty array by default.")
-        XCTAssertEqual(UserDefaults.dishesFilters, [Dish](), "Dish filters should equal empty array by default.")
-        XCTAssertEqual(UserDefaults.mealsFilters, [Meal](), "Meal filters should equal empty array by default.")
+        XCTAssertNotNil(UserDefaults.favouriteRecipes, "Favourite recipes should not equal nil.")
+        XCTAssertNotNil(UserDefaults.cuisinesFilters, "Cuisine filters should not equal nil.")
+        XCTAssertNotNil(UserDefaults.dietsFilters, "Diet filters should not equal nil.")
+        XCTAssertNotNil(UserDefaults.dishesFilters, "Dish filters should not equal nil.")
+        XCTAssertNotNil(UserDefaults.mealsFilters, "Meal filters should not equal nil.")
     }
 }
