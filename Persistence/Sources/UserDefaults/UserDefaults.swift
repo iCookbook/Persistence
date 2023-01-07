@@ -16,6 +16,10 @@ public extension UserDefaults {
     @UserDefault(key: "searchRequestsHistory", defaultValue: [String]())
     static var searchRequestsHistory: [String]
     
+    /// Defines whether user has already onboarded or not.
+    @UserDefault(key: "hasOnboarded", defaultValue: false)
+    static var hasOnboarded: Bool
+    
     /// Contains search requests history.
     @UserDefault(key: "userAvatar")
     static var userAvatar: Data?

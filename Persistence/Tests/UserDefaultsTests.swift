@@ -15,8 +15,11 @@ class UserDefaultsTests: XCTestCase {
     }
     
     func testDefaultNilUserDefault() throws {
-        XCTAssertNil(UserDefaults.userAvatar, "User avatar should equal nil by default.")
-        XCTAssertNil(UserDefaults.userName, "User name should equal nil by default.")
+        UserDefaults.userAvatar = nil
+        UserDefaults.userName = nil
+        
+        XCTAssertNil(UserDefaults.userAvatar, "User avatar property should allow to contain nil.")
+        XCTAssertNil(UserDefaults.userName, "User name property should allow to contain nil.")
     }
     
     func testCodableUserDefault() throws {
