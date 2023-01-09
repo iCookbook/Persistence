@@ -140,13 +140,6 @@ public final class CoreDataManager {
         recipe.comment = data.comment
         recipe.ingredients = data.ingredients
         recipe.imageData = data.imageData
-        
-        data.steps?.forEach {
-            guard let index = data.steps?.firstIndex(of: $0),
-                  let array = recipe.steps?.array as? [Step] else { return }
-            
-            update(array[index], with: $0)
-        }
     }
     
     private func transferData(from data: StepData, to step: Step) {
@@ -175,11 +168,23 @@ extension CoreDataManager: CDRecipeProtocol {
     public func createRecipe(with data: RecipeData) {
         let recipe = Recipe(context: managedObjectContext)
         transferData(from: data, to: recipe)
+        
+        data.steps?.forEach {
+            createStep(with: $0, for: recipe)
+        }
         saveContext()
     }
     
     public func update(_ recipe: Recipe, with data: RecipeData) {
         transferData(from: data, to: recipe)
+        
+        data.steps?.forEach {
+            guard let index = data.steps?.firstIndex(of: $0),
+                  let array = recipe.steps?.array as? [Step]
+            else { return }
+            
+            update(array[index], with: $0)
+        }
         saveContext()
     }
     

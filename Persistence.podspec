@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Persistence'
-  s.version          = '3.1.0'
+  s.version          = '3.1.1'
   s.summary          = 'Persistence layer of the project.'
   s.homepage         = 'https://github.com/iCookbook/Persistence'
   s.author           = { 'htmlprogrammist' => '60363270+htmlprogrammist@users.noreply.github.com' }
